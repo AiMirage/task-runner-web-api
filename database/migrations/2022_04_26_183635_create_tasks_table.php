@@ -14,10 +14,10 @@ return new class extends Migration {
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->enum('type', []);
+            $table->enum('type', ['words','lines','chars']);
             $table->integer('occurrences')->nullable();
             $table->string('result')->nullable();
-            $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
+            $table->foreignUuid('project_id')->constrained('projects')->cascadeOnDelete();
             $table->timestamps();
         });
     }
