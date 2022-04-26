@@ -22,5 +22,14 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('login', [\App\Http\Controllers\Auth\UserController::class, 'login']);
 
 
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+
+        /**
+         * Tasks | Projects
+         */
+        Route::apiResource('tasks', \App\Http\Controllers\TaskController::class);
+
+    });
+
 
 });
