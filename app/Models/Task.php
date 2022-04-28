@@ -21,4 +21,18 @@ class Task extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function getStatusAttribute()
+    {
+        switch ($this->result) {
+            case 'success' :
+                return '🟢';
+            case 'failed':
+                return '🔴';
+            case null:
+                return '⌛';
+            default :
+                return '↪️';
+        }
+    }
 }
