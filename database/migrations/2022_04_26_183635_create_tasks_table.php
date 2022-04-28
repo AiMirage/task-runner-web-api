@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->integer('occurrences')->nullable();
             $table->string('result')->nullable();
             $table->foreignUuid('project_id')->constrained('projects')->cascadeOnDelete();
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('ended_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
