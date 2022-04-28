@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Models\Concerns\UsesUuid;
+use App\Services\Count\Counter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
-    use HasFactory, SoftDeletes, UsesUuid;
+    use HasFactory, SoftDeletes, UsesUuid, Counter;
 
     protected $fillable = [
         'type',
@@ -25,9 +26,9 @@ class Task extends Model
     public function getStatusAttribute()
     {
         switch ($this->result) {
-            case 'success' :
+            case 'Success' :
                 return '🟢';
-            case 'failed':
+            case 'Failed':
                 return '🔴';
             case null:
                 return '⌛';
