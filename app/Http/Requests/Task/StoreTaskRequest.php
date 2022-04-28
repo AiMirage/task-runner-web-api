@@ -26,7 +26,7 @@ class StoreTaskRequest extends FormRequest
         return [
             'project_id' => 'required',
             'type' => 'required|in:words,chars,lines',
-            'file' => 'required|max:10000|mimes:txt',
+            'file' => 'required',
         ];
     }
 }
