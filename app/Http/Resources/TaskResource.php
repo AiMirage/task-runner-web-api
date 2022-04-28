@@ -20,8 +20,12 @@ class TaskResource extends JsonResource
         return [
             'id' => $this->id,
             'type' => 'Count ' . ucfirst($this->type),
+            'result' => $this->result,
+            'occurrences' => $this->occurrences,
             'project' => $this->whenLoaded('Project'),
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
+            'started_at' => $this->created_at,
+            'ended_at' => $this->created_at,
         ];
     }
 }

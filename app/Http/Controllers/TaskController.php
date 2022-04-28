@@ -22,11 +22,13 @@ class TaskController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $project = $this->projectsRepo->find($id);
+
+        return $this->sendResponse(TaskResource::collection($project->Tasks), 'Tasks retrieved successfully');
     }
 
     /**
@@ -45,6 +47,8 @@ class TaskController extends BaseController
         $project = $this->projectsRepo->firstOrCreate($input['project_id']);
 
         $task = $project->Tasks()->create($input);
+
+        $task->count($input['file']);
 
         return $this->sendResponse(new TaskResource($task), 'Task created successfully');
     }
