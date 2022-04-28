@@ -27,6 +27,7 @@ Route::group(['prefix' => 'v1'], function () {
         /**
          * Tasks | Projects
          */
+        Route::get('projects', \App\Http\Controllers\ProjectController::class);
         Route::apiResource('tasks', \App\Http\Controllers\TaskController::class);
 
     });
