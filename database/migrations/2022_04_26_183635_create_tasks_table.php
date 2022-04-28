@@ -14,11 +14,12 @@ return new class extends Migration {
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->enum('type', ['words','lines','chars']);
+            $table->enum('type', ['words', 'lines', 'chars']);
             $table->integer('occurrences')->nullable();
             $table->string('result')->nullable();
             $table->foreignUuid('project_id')->constrained('projects')->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
