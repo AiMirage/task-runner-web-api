@@ -29,6 +29,7 @@ Route::group(['prefix' => 'v1'], function () {
          */
         Route::get('projects', \App\Http\Controllers\ProjectController::class);
         Route::get('projects/{id}/tasks', [\App\Http\Controllers\TaskController::class, 'index']);
+        Route::post('tasks', [\App\Http\Controllers\TaskController::class, 'store']);
     });
 
 

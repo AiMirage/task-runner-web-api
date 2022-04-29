@@ -3,6 +3,7 @@
 namespace App\Services\Count;
 
 use Carbon\Carbon;
+use Storage;
 
 trait Counter
 {
@@ -12,7 +13,7 @@ trait Counter
         'chars' => 0
     ];
 
-    public function count($file)
+    public function count()
     {
 
         $total = null;
@@ -21,13 +22,14 @@ trait Counter
         $this->started_at = Carbon::now();
         $this->save();
 
-        $handle = fopen($file, "r");
+//        $handle = fopen($file, "r");
+        $handle = Storage::readStream($this->file);
 
         while (!feof($handle)) {
             $line = fgets($handle);
             $bytesLeft = (int)stream_get_meta_data($handle)['unread_bytes'];
             if (isset($total)) {
-                $progress = round(($total - $bytesLeft) / $total * 100);
+                $progress = round(abs($total - $bytesLeft) / $total * 100);
             } else {
                 $total = $bytesLeft;
             }
@@ -44,7 +46,6 @@ trait Counter
         fclose($handle);
 
         $this->updateStatus($progress);
-        $this->ended_at = Carbon::now();
         $this->save();
 
     }
@@ -54,6 +55,7 @@ trait Counter
         $this->occurrences = $this->all[$this->type];
         if ($progress == 100 || $progress == 0) {
             $this->result = $this->occurrences == 0 ? 'Failed' : 'Success';
+            $this->ended_at = $this->occurrences == null ? null : Carbon::now();
         } else {
             $this->result = $progress;
         }

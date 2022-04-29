@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->enum('type', ['words', 'lines', 'chars']);
             $table->integer('occurrences')->nullable();
             $table->string('result')->nullable();
+            $table->string('file');
             $table->foreignUuid('project_id')->constrained('projects')->cascadeOnDelete();
             $table->timestamp('started_at')->nullable();
             $table->timestamp('ended_at')->nullable();

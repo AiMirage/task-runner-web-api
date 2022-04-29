@@ -46,9 +46,14 @@ class TaskController extends BaseController
          */
         $project = $this->projectsRepo->firstOrCreate($input['project_id']);
 
+        $path = $request->file('file')->store('tasks');
+        $input['file'] = $path;
+
         $task = $project->Tasks()->create($input);
 
-        $task->count($input['file']);
+        dispatch(function () use ($task) {
+            $task->count();
+        });
 
         return $this->sendResponse(new TaskResource($task), 'Task created successfully');
     }

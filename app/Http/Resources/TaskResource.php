@@ -24,8 +24,8 @@ class TaskResource extends JsonResource
             'occurrences' => $this->occurrences,
             'project' => $this->whenLoaded('Project'),
             'created_at' => $this->created_at,
-            'started_at' => $this->created_at,
-            'ended_at' => $this->created_at,
+            'started_at' => $this->started_at,
+            'ended_at' => $this->ended_at,
         ];
     }
 }
