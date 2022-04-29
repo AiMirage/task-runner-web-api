@@ -40,7 +40,11 @@ php artisan migrate:fresh --seed
 ```
 php artisan serve
 ```
-7. Test (using Swagger | Postman | Frontend)
+7. Run queue worker (for file counting process)
+```
+php artisan queue:work
+```
+8. Test (using Swagger | Postman | Frontend)
 ```
 email: admin@admin.com
 password: 123456
